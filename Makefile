@@ -1,12 +1,11 @@
-OBJ = main.o
+SRC = $(wildcard *.cpp)
+OBJ = $(patsubst %.cpp, %.o, $(SRC))
 INC = -I "./"
 
-Raytracer: $(OBJ)
-	g++ $(OBJ) -o Raytracer
+all:
+	g++ -c $(SRC) $(INC)
+	g++ $(OBJ) -o stella
 	rm -f $(OBJ)
 
-main.o:
-	g++ -c main.cpp $(INC)
-
 clean:
-	rm -f $(OBJ) Raytracer
+	rm -f $(OBJ) stella

@@ -1,25 +1,12 @@
 #pragma once
-#include "Vect.hpp"
+#include "Point.hpp"
+#include "Vector.hpp"
 
 class Ray {
-  Vect origin, direction;
+  Point pos;
+  Vector dir;
 
 public:
-  Ray();
-
-  Ray(Vect, Vect);
-
-  // method functions
-  Vect getRayOrigin() { return origin; }
-  Vect getRayDirection() { return direction; }
+  Ray(Point pos, Vector dir);
+  Point getPointAtDistance(double distance);
 };
-
-Ray::Ray() {
-  origin = Vect(0, 0, 0);
-  direction = Vect(1, 0, 0);
-}
-
-Ray::Ray(Vect o, Vect d) {
-  origin = o;
-  direction = d;
-}
