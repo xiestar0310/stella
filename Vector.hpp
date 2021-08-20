@@ -20,3 +20,4 @@ public:
 
 Vector operator+(Vector v1, Vector v2);
 Vector operator*(Vector v, double num);
+double operator*(Vector v1, Vector v2);

@@ -34,3 +34,7 @@ Vector operator+(Vector v1, Vector v2) {
 Vector operator*(Vector v, double num) {
   return Vector(v.getX() * num, v.getY() * num, v.getZ() * num);
 }
+
+double operator*(Vector v1, Vector v2) {
+  return v1.getX() * v2.getX() + v1.getY() * v2.getY() + v1.getZ() * v2.getZ();
+}

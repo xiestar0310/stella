@@ -27,15 +27,23 @@ void Point::add(Point pt) {
   z += pt.getZ();
 }
 
-Point operator+(Point p1, Point p2) {
-  return Point(p1.getX() + p2.getX(), p1.getY() + p2.getY(),
-               p1.getZ() + p2.getZ());
-}
-
 Point operator+(Point p, Vector v) {
   return Point(p.getX() + v.getX(), p.getY() + v.getY(), p.getZ() + v.getZ());
 }
 
 Point operator+(Vector v, Point p) {
   return Point(p.getX() + v.getX(), p.getY() + v.getY(), p.getZ() + v.getZ());
+}
+
+Vector operator-(Point p1, Point p2) {
+  return Vector(p1.getX() - p2.getX(), p1.getY() - p2.getY(),
+                p1.getZ() - p2.getZ());
+}
+
+Point operator-(Point p, Vector v) {
+  return Point(p.getX() - v.getX(), p.getY() - v.getY(), p.getZ() - v.getZ());
+}
+
+Point operator-(Vector v, Point p) {
+  return Point(p.getX() - v.getX(), p.getY() - v.getY(), p.getZ() - v.getZ());
 }

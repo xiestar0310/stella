@@ -1,5 +1,6 @@
 #pragma once
 #include "Point.hpp"
+#include "Ray.hpp"
 #include "Vector.hpp"
 
 class Camera {
@@ -11,8 +12,13 @@ class Camera {
 public:
   Camera(Point pos, Vector up, Vector dir, double angle, int w_pixel,
          int h_pixel);
-  Point getPos();
-  Vector getUp();
-  Vector getDir();
-  Point getPointFromPixel(int x, int y);
+  Point getPos() { return pos; }
+  Point getMiddle() { return middle; }
+  Vector getUp() { return up; }
+  Vector getDir() { return dir; }
+  Vector getRight() { return right; }
+  int getWPixel() { return w_pixel; }
+  int getHPixel() { return h_pixel; }
+
+  Ray getRayFromPixel(int x, int y);
 };

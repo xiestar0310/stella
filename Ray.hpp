@@ -8,5 +8,7 @@ class Ray {
 
 public:
   Ray(Point pos, Vector dir);
+  Point getPos() { return pos; }
+  Vector getDir() { return dir; }
   Point getPointAtDistance(double distance);
 };

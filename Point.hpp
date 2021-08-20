@@ -19,6 +19,8 @@ public:
   }
 };
 
-Point operator+(Point p1, Point p2);
 Point operator+(Point p, Vector v);
 Point operator+(Vector v, Point p);
+Vector operator-(Point p1, Point p2);
+Point operator-(Point p, Vector v);
+Point operator-(Vector v, Point p);
