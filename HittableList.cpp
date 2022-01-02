@@ -7,7 +7,7 @@ bool HittableList::hit(const Ray &ray, double min, double max,
   double closest = max;
 
   for (const shared_ptr<Hittable> &object : objects) {
-    if (object->hit(ray, min, closest, record)) {
+    if (object->hit(ray, min, closest, temp)) {
       hitAnything = true;
       closest = temp.t;
       record = temp;

@@ -32,7 +32,7 @@ using std::make_shared;
 Colour rayColour(const Ray &ray, const Hittable &world) {
   hitLog record;
   if (world.hit(ray, 0, INF, record)) {
-    return 0.5 * (record.normal + Colour(1.0, 1.0, 1.0));
+    return 0.5 * (record.normal + Colour(1, 1, 1));
   }
   Vector unitDir = (ray.getDir()).normalize();
   double t = 0.5 * (unitDir.getY() + 1.0);
