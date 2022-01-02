@@ -1,10 +1,9 @@
 #include "Ray.hpp"
 
-Ray::Ray(Point pos, Vector dir) {
-  this->pos = pos;
-  this->dir = dir;
-}
+Ray::Ray() : pos(0, 0, 0), dir(0, 0, 0) {}
 
-Point Ray::getPointAtDistance(double distance) {
+Ray::Ray(const Point &pos, const Vector &dir) : pos(pos), dir(dir) {}
+
+Point Ray::getPointAtDistance(double distance) const {
   return pos + (dir * distance);
 }

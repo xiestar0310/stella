@@ -3,8 +3,8 @@ OBJ = $(patsubst %.cpp, %.o, $(SRC))
 INC = -I "./"
 
 all:
-	g++ -c $(SRC) $(INC)
-	g++ $(OBJ) -o stella
+	g++ -std=c++17 -c $(SRC) $(INC)
+	g++ -std=c++17 $(OBJ) -o stella
 	rm -f $(OBJ)
 
 clean:

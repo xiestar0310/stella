@@ -10,7 +10,7 @@ Camera::Camera(Point pos, Vector up, Vector dir, double angle, int w_pixel,
   this->angle = angle * atan(1) * 4 / 180;
   this->w_pixel = w_pixel;
   this->h_pixel = h_pixel;
-  right = dir.crossProduct(up);
+  right = crossProduct(dir, up);
   middle = pos + dir;
 }
 

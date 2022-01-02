@@ -7,8 +7,9 @@ class Ray {
   Vector dir;
 
 public:
-  Ray(Point pos, Vector dir);
-  Point getPos() { return pos; }
-  Vector getDir() { return dir; }
-  Point getPointAtDistance(double distance);
+  Ray();
+  Ray(const Point &pos, const Vector &dir);
+  Point getPos() const { return pos; }
+  Vector getDir() const { return dir; }
+  Point getPointAtDistance(double distance) const;
 };

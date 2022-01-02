@@ -1,40 +1,32 @@
 #include "Vector.hpp"
 #include <cmath>
 
-Vector::Vector() {
-  x = 0;
-  y = 0;
-  z = 0;
-}
+Vector::Vector() : x(0), y(0), z(0) {}
+Vector::Vector(double x, double y, double z) : x(x), y(y), z(z) {}
 
-Vector::Vector(double x, double y, double z) {
-  this->x = x;
-  this->y = y;
-  this->z = z;
-}
-double Vector::getX() { return x; }
-double Vector::getY() { return y; }
-double Vector::getZ() { return z; }
+double Vector::getX() const { return x; }
+double Vector::getY() const { return y; }
+double Vector::getZ() const { return z; }
 
-Vector Vector::crossProduct(Vector vect) {
-  return Vector(y * vect.z - z * vect.y, z * vect.x - x * vect.z,
-                x * vect.y - y * vect.x);
-}
+double Vector::length() const { return std::sqrt(x * x + y * y + z * z); }
 
-Vector Vector::normalize() {
-  double length = std::sqrt(x * x + y * y + z * z);
+Vector Vector::normalize() const {
+  double length = this->length();
   return Vector(x / length, y / length, z / length);
 }
 
-Vector operator+(Vector v1, Vector v2) {
-  return Vector(v1.getX() + v2.getX(), v1.getY() + v2.getY(),
-                v1.getZ() + v2.getZ());
+Vector &Vector::operator+=(const Vector &vect) {
+  x += vect.x;
+  y += vect.y;
+  z += vect.z;
+  return *this;
 }
 
-Vector operator*(Vector v, double num) {
-  return Vector(v.getX() * num, v.getY() * num, v.getZ() * num);
+Vector &Vector::operator*=(const double t) {
+  x *= t;
+  y *= t;
+  z *= t;
+  return *this;
 }
 
-double operator*(Vector v1, Vector v2) {
-  return v1.getX() * v2.getX() + v1.getY() * v2.getY() + v1.getZ() * v2.getZ();
-}
+Vector &Vector::operator/=(const double t) { return *this *= 1 / t; }
