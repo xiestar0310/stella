@@ -9,8 +9,8 @@ std::pair<double, double> Sphere::modified_quadratic_formula(double a, double b,
                                                              double c) const {
   double first, second;
   if (b * b - a * c >= 0) {
-    first = (-b - sqrt(b * b - a * c) / a);
-    second = (-b + sqrt(b * b - a * c) / a);
+    first = (-b - sqrt(b * b - a * c)) / a;
+    second = (-b + sqrt(b * b - a * c)) / a;
   } else {
     first = -INF;
     second = -INF;
