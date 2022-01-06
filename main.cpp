@@ -29,10 +29,17 @@ First obj we hit = colour of thing
 
 using std::make_shared;
 
-Colour rayColour(const Ray &ray, const Hittable &world) {
+Colour rayColour(const Ray &ray, const Hittable &world, int depth) {
   hitLog record;
+
+  // Check if we have exceeded the limit
+  if (depth <= 0)
+    return Colour(0, 0, 0);
+  // check hitbox
   if (world.hit(ray, 0, INF, record)) {
-    return 0.5 * (record.normal + Colour(1, 1, 1));
+    Point target = record.point + record.normal + randomInUnitSphere();
+    return 0.5 * rayColour(Ray(record.point, target - record.point), world,
+                           depth - 1);
   }
   Vector unitDir = (ray.getDir()).normalize();
   double t = 0.5 * (unitDir.getY() + 1.0);
@@ -43,7 +50,9 @@ int main() {
 
   const auto aspectRatio = 16.0 / 9.0;
   const int width = 400;
-  const int height = 225;
+  const int height = static_cast<int>(width / aspectRatio);
+  const int samples = 100;
+  const int maxDepth = 50;
 
   // World
   HittableList world;
@@ -51,31 +60,22 @@ int main() {
   world.add(make_shared<Sphere>(Point(0, -100.5, -1), 100));
 
   // Camera
-  double viewportHeight = 2.0;
-  double viewportWidth = aspectRatio * viewportHeight;
-  double focalLength = 1.0;
-
-  Point origin = Point();
-  Vector horizontal = Vector(viewportWidth, 0, 0);
-  Vector vertical = Vector(0, viewportHeight, 0);
-  Point bottomLeftCorner =
-      origin - horizontal / 2 - vertical / 2 - Vector(0, 0, focalLength);
-
+  Camera camera;
   // Rendering part
 
   std::cout << "P3\n" << width << ' ' << height << "\n255\n";
 
-  for (int row = 0; row < height; row++) {
-    std::cerr << "\rScanlines remaining: " << height - row - 1 << ' '
-              << std::flush;
+  for (int row = height - 1; row >= 0; row--) {
+    std::cerr << "\rScanlines remaining: " << row << ' ' << std::flush;
     for (int col = 0; col < width; col++) {
-      double u = double(col) / (width - 1);
-      double v = 1 - double(row) / (height - 1);
-      Ray ray(origin, bottomLeftCorner + u * horizontal + v * vertical -
-                          Point(0, 0, 0)); // - origin instead of point
-      Colour pixelColour = rayColour(ray, world);
-      printColour(std::cout, pixelColour);
-      // Ray cur = camera.getRayFromPixel(i, j);
+      Colour colour(0, 0, 0);
+      for (int s = 0; s < samples; s++) {
+        double u = (col + randDouble()) / (width - 1);
+        double v = (row + randDouble()) / (height - 1);
+        Ray ray = camera.getRay(u, v);
+        colour += rayColour(ray, world, maxDepth);
+      }
+      printColour(std::cout, colour, samples);
     }
   }
   std::cerr << "\nDone.\n";

@@ -1,24 +1,17 @@
 #pragma once
+#include "Math.hpp"
 #include "Point.hpp"
 #include "Ray.hpp"
 #include "Vector.hpp"
 
 class Camera {
-  Point pos, middle;
-  Vector up, dir, right;
-  double angle;
-  int w_pixel, h_pixel;
+  Point origin;
+  Point lowerLeftCorner;
+  Vector horizontal;
+  Vector vertical;
 
 public:
-  Camera(Point pos, Vector up, Vector dir, double angle, int w_pixel,
-         int h_pixel);
-  Point getPos() { return pos; }
-  Point getMiddle() { return middle; }
-  Vector getUp() { return up; }
-  Vector getDir() { return dir; }
-  Vector getRight() { return right; }
-  int getWPixel() { return w_pixel; }
-  int getHPixel() { return h_pixel; }
+  Camera();
 
-  Ray getRayFromPixel(int x, int y);
+  Ray getRay(double u, double v) const;
 };

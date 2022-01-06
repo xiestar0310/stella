@@ -10,6 +10,8 @@ double Vector::getZ() const { return z; }
 
 double Vector::length() const { return std::sqrt(x * x + y * y + z * z); }
 
+double Vector::lengthSquared() const { return x * x + y * y + z * z; }
+
 Vector Vector::normalize() const {
   double length = this->length();
   return Vector(x / length, y / length, z / length);
@@ -30,3 +32,12 @@ Vector &Vector::operator*=(const double t) {
 }
 
 Vector &Vector::operator/=(const double t) { return *this *= 1 / t; }
+
+Vector randomInUnitSphere() {
+  while (true) {
+    Vector p = Vector::random(-1, 1);
+    if (p.lengthSquared() >= 1)
+      continue;
+    return p;
+  }
+}

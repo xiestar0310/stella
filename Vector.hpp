@@ -1,4 +1,5 @@
 #pragma once
+#include "Math.hpp"
 #include <iostream>
 
 class Vector {
@@ -11,12 +12,22 @@ public:
   double getY() const;
   double getZ() const;
   double length() const;
+  double lengthSquared() const;
   Vector normalize() const;
 
   Vector &operator+=(const Vector &vect);
   Vector &operator*=(const double t);
   Vector &operator/=(const double t);
   Vector operator-() const { return Vector(-x, -y, -z); }
+
+  inline static Vector random() {
+    return Vector(randDouble(), randDouble(), randDouble());
+  }
+
+  inline static Vector random(double min, double max) {
+    return Vector(randDouble(min, max), randDouble(min, max),
+                  randDouble(min, max));
+  }
 
   friend std::ostream &operator<<(std::ostream &os, const Vector &p) {
     return os << p.x << ", " << p.y << ", " << p.z;
@@ -50,3 +61,5 @@ inline Vector crossProduct(const Vector &v1, const Vector &v2) {
                 v1.getZ() * v2.getX() - v1.getX() * v2.getZ(),
                 v1.getX() * v2.getY() - v1.getY() * v2.getX());
 }
+
+Vector randomInUnitSphere();

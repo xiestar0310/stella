@@ -11,10 +11,12 @@ public:
   double getG() const;
   double getB() const;
 
+  Colour &operator+=(const Colour &colour);
+
   // do merge function later
 };
 
-void printColour(std::ostream &out, const Colour &colour);
+void printColour(std::ostream &out, const Colour &colour, int samples);
 
 inline Colour operator+(const Colour &c1, const Colour &c2) {
   return Colour(c1.getR() + c2.getR(), c1.getG() + c2.getG(),
